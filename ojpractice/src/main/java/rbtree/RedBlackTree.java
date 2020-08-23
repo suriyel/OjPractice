@@ -141,13 +141,13 @@ public class RedBlackTree<Key extends Comparable<Key>,Value> {
         //当h的左子节点为黑色，右子节点为红色，需要左旋
         if (isRed(h.right) && !isRed(h.left)) {
             //旋转后，当前节点位置已改变，父节点重新对接
-           return rotateLeft(h);
+           h = rotateLeft(h);
         }
 
         //进行右旋,当h的左子节点和左子节点的左子节点都为红色，需要右旋
         if (isRed(h.left) && isRed(h.left.left)) {
             //旋转后，当前节点位置已改变，父节点重新对接
-            return rotateRight(h);
+           h = rotateRight(h);
         }
 
         //颜色反转,h的左子节点和右子节点都为红色，需要进行颜色反转

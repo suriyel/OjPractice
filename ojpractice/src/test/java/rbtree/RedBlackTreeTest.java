@@ -26,6 +26,22 @@ public class RedBlackTreeTest {
         fun.andThen(getAssertFunc(Arrays.asList(4,2,1,3,6,5))).apply(6,"f");
     }
 
+    @Test
+    public void t2(){
+        RedBlackTree<Integer,String> redBlackTree = new RedBlackTree();
+        BiFunction<Integer,String, Stream<RedBlackTree<Integer, String>.Node>> fun = (n, str)-> {
+            redBlackTree.put(n, str);
+            return redBlackTree.toStream();
+        };
+
+        fun.andThen(getAssertFunc(Arrays.asList(6))).apply(6,"f");
+        fun.andThen(getAssertFunc(Arrays.asList(6,5))).apply(5,"e");
+        fun.andThen(getAssertFunc(Arrays.asList(5,4,6))).apply(4,"d");
+        fun.andThen(getAssertFunc(Arrays.asList(4,3,5,6))).apply(3,"c");
+        fun.andThen(getAssertFunc(Arrays.asList(4,2,1,3,5))).apply(2,"b");
+        fun.andThen(getAssertFunc(Arrays.asList(4,2,1,3,6,5))).apply(1,"a");
+    }
+
     private Function<Stream<RedBlackTree<Integer, String>.Node>,Boolean> getAssertFunc(List<Integer> targets) {
         return nodeStream -> {
             List<RedBlackTree<Integer, String>.Node> lists = nodeStream.collect(Collectors.toList());
